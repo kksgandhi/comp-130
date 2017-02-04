@@ -1,0 +1,21 @@
+This program contains 4 parts (funtions), changing a name to a number, changing a number to a name, determining a winner from two numerical inputs and finally a function that creates a computer input and plays the game with a player input.
+
+I created a constant global tuple with all of the possible inputs
+In order to change the input to a number, I searched through the tuple and returned the index
+To change the number to a word, I returned the tuple's index at said number
+
+To determine the winner, I calculated computer input minus player input, all modulo 5
+
+Due to the way the name and number representations worked out, the above formula output 1 or 2 if the computer won, 3 or 4 if the player won, and 0 if it was a tie
+
+The final function, rpsls began by generating a random computer input from 0-4 inc.
+It then converted the player input to a number using the name_to_number function, printing an error if the player input was incorrect
+
+finally it printed the appropriate win or lose statement based on who won, using the winner function to determine whether who won.
+
+Questions:
+Seperate instances print different results occasionally because the computer input is randomized, and therefore the return is also randomized
+
+Only rpsls can return different results on the same inputs because it is the only function with a random aspect
+
+Player has a 40% chance to win, 40% chance to lose, 20% chance to tie, assuming that python's random function has a statistically equal chance to return everything  

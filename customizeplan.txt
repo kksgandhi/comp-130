@@ -1,0 +1,29 @@
+This program involved calculating the cost and power creation of a house
+
+The inputs are living room width, office length, number of bedrooms, bedroom width, bedroom length, MBR (Master bedroom) width, and MBR length
+The outputs of the program are power generated and cost of the house
+In order to calculate the cost, I first calculated the area, then calculated the perimeter
+At the end of the cost function, I calculated the cost using the area and perimeter values
+(Each area square foot costs $100 and each perimeter foot costs $80)
+To calculate area, I added the areas of each room
+The garage is 22 multiplied by 24 square feet
+The Kitchen and Living area is 22 multiplied by the width of the living area
+The master bedroom is the MBR width times the MBR Length
+The Master Bathroom is the MBR length times 12
+The other bedrooms are bedroom width times bedroom length
+Since there are multiple bedrooms, I multiplied the area by the number of bedrooms
+The office is the office length multiplied by the sum of four and the bedroom width
+The bathrooms are 10 times the bedroom width, multiplied by two, since there are two bathrooms
+The hallway is four feet wide, multiplied by the sum of 20 (the bathrooms) and bedroom length and the number of bedrooms
+The perimeter was a bit more complicated
+For the garage and kitchen, the perimeter is 24 plus two times the sum of 22 and the living width
+The Master bedroom and bathroom is the master bedroom length times 2, plus the sum of the master bedroom width and 12 times two, minus the sum of 4 and bedroom width (because that is internal)
+The offices and bedrooms had a perimeter of 4, plus the bedroom width, plus the sum of the office length, 20, bedroom length, and number of bedrooms, all multiplied by two, subtracting 24
+
+In order to calculate power consumption this method was used
+The area of panels was found by multiplying the sum of 4 and bedroom width by the sum of office length, 20, bedroom length (multipled by number of bedrooms) and master bedroom length
+The area of panels was divided by the cosine of 25.9*pi/180, this accounted for the angle of the panels
+This area was multiplied by 0.092903 to convert to square meters
+The power was finally calculated by multiplying the square meters by 6.1 by 0.22 (the power generation and efficiency respectively)
+
+
