@@ -1,0 +1,6 @@
+Disclaimer: Input sanitization and code re-use is not explicitly mentioned in this recipe, however both were used extensively
+1) For arithmetic mean, I will loop through all the elements of the array and add them up to a sum variable, then divid sum by the size of the array
+2) For pop variance I will find the mean of the input, create a new list, append to that list the squares of each element in the input minus the mean, then find the mean of the new list
+3) For sample variance I will find the population variance then multiply by n/(n-1)
+4) For the lower median I will return the middle element in a list by dividing by 2. Off by one errors must be accounted for and even vs odd lengths must be accounted for
+5)  
