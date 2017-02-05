@@ -3,4 +3,7 @@ Disclaimer: Input sanitization and code re-use is not explicitly mentioned in th
 2) For pop variance I will find the mean of the input, create a new list, append to that list the squares of each element in the input minus the mean, then find the mean of the new list
 3) For sample variance I will find the population variance then multiply by n/(n-1)
 4) For the lower median I will return the middle element in a list by dividing by 2. Off by one errors must be accounted for and even vs odd lengths must be accounted for
-5)  
+5) For random sample, I will create two new lists, a return list and a copy of the data to ensure lack of code mutation. I will loop the required number of times, and each time pop a random element from the data into the return list
+6) I will create a return list with 5 elements, all 0. For each element, I will increment (by one) the relevant element in the return list.
+7) I will start at array element 0, and go to element length - n (where n is the size of the moving average). At each element, I will find the average of that element and the next n elements. I will add that average to a return list
+8) Using the above code, I will find the variances, means, and random samples that I have to for the one sample test, then I will apply the one sample formula and return the result.
