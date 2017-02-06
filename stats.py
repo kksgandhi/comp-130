@@ -39,7 +39,7 @@ def lower_median(median_list):
     else:
         return_val = sorted_list[length/2]
     return return_val
-
+#ajsfajdkljaslk
 def random_sample(data,sample_size):
     """Returns a random sample of data, size of sample_size, no repeats"""
     return_list=[]
