@@ -1,0 +1,21 @@
+Recipe: I will begin by defining change pred and change prey so that they take input of variables in the LV algorithm, then return output by applying the algorithm. 
+
+I will define pred_prey_timesteps by creating a list of pred and prey, initialized with the initial population values. I will iterate a number of times which is the multiple of years and timesteps per year. Each iteration I will add to the list of pred and prey by applying the change functions to the last element on the list. I will return a larger list, composed of tuples. The tuples will be the time elapsed, the prey list, and the pred list. 
+
+I will also define pred_prey_carrying using the same code as pred_prey_timesteps, however after change_prey I will use the minimum of the new value or the carrying cap. 
+
+Plotting the pred and prey should be trivial, merely use the built in simpleplot function, although it may require some unzipping and rezipping. 
+
+1)  pred_prey_timesteps(0.5, 0, 0, 0, 100, 5, 40, 100)
+In this, the birth rate is positive so there is always something to grow the population, and there is nothing to decrease the population (no predation) so the population will ever increase. 
+
+2) pred_prey_timesteps(0, 0, 0.1, 0, 4, 10, 40, 100)
+In this, there is a positive growth rate so the population is ever increasing, and there is no death, so there is nothing to decrease the population and so it will forever increase.
+
+3) pred_prey_timesteps(0.5, 0.2, 0, 0, 400, 4, 40, 100)
+In this, there is slightly more predation and predators than there are births, so the population of prey keeps decreasing. The predator population is kept constant because there is no growth or death.
+
+4) pred_prey_timesteps(0, 0, 0.1, 0.6, 4, 400, 40, 100)
+In this, there is small growth, but the death rate outweighs it, leading to an ever decreasing predator level. The prey level is kept constant because there is no births or predation.
+
+Carrying capacity: The carrying capacity prevents patterns from increasing forever. Instead, the prey level will remain at the cap or the prey level will begin cycling as predator catches up to it.
