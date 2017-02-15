@@ -45,7 +45,7 @@ def pred_prey_timesteps(birth, predation, growth, death, prey, pred, years, num_
         index+=1
     return return_list
 #                                 b   p   g  d  pr   pr y   n
-populations = pred_prey_timesteps(0.5, 0, 0, 0, 100, 5, 40, 100)
+populations = pred_prey_timesteps(0.5, 0, 0, 0, 100, 5, 40, 1)
 # 2:
 # Define the function
 # pred_prey(birth, predation, growth, death, prey, pred, num_timesteps)
@@ -100,7 +100,7 @@ def pred_prey_carrying(birth, predation, growth, death, carry_cap, prey, pred, y
 # Plotting results
 
 
-#print(populations)
+print(populations)
 
 def plot_pred_prey(populations, pred_name, prey_name):
     """plots prey pop. vs predator pop."""

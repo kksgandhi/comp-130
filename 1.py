@@ -1,7 +1,4 @@
-x=range(5)
-y=x
-x=[0,1,10,3,4]
+favorites = {"Hello": "There", "Allo": "Therey"}
 
-
-print(x)
-print(y)
+favorites["fruit" : "blackberry"]
+print(favorites)
