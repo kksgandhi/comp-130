@@ -1,0 +1,18 @@
+empty_db():
+Merely returns empty dictionary: {} (I realize after coding that I should have used default dict, but my code checks for errors and works fine, it was just harder)
+add_item():
+returns false if both the artist and artwork are in the database.
+otherwise, it initializes artist into the database, and then initializes the artwork into a tuple of the relevant information
+change_owner():
+if the artst or artwork doesn't exist, returns false. Otherwise creates a temporary tuple of the info already in the database, a new tuple with the new information, and sets the database's information to the new updated tuple
+select-artist():
+creates a temp dictionary, if the artist exists add artist information to the temp dictionary and return it, otherwise return false
+select artwork():
+create a temporary database, loop through all the artists, if the artwork exists, initialize the temporary database to have the artists and add the artwork information to that. Do not initialize if the artist already exists in the temporary database. return the temporary database.
+select year():
+Same as select artwork, however look for the year instead of the artwork. Loop through everything, look at the relevant part of the tuple, add to temporary database if necessary.
+select description and select owner work in the same manner
+sorted database():
+create a sorted list of keys, and loop through the database with those keys. Do the same method with the artwork keys. Recreate the database as a list of lists and tuples using the order provided by the sorted keys.
+format results():
+create an initial string, and use sorted_database() to create a sorted database. Loop through every artist, append the artist to the string, append a newline and 4 spaces, then add all of the artwork information. Add another newline, another 4 spaces, and add more artwork information. Remove 4 spaces if its the last artwork, because the next artist doesn't have 4 spaces intitiallly.
