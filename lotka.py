@@ -9,7 +9,7 @@ the Python documentation (the "Docs" link on the CodeSkulptor page).
 """
 
 
-#################################################################
+#
 # Predator-prey problem
 
 # 1:
@@ -18,31 +18,45 @@ the Python documentation (the "Docs" link on the CodeSkulptor page).
 # Lotka-Volterra Model video.
 def change_prey(birth, predation, prey, pred):
     """Returns the change in prey population based on certain variables"""
-    change_in_prey = (birth)*prey - predation*prey*pred
+    change_in_prey = (birth) * prey - predation * prey * pred
     return change_in_prey
+
+
 def change_pred(growth, death, prey, pred):
     """Returns the change in predator population based on certain variables"""
-    change_in_pred = (growth)*prey*pred - death*pred
+    change_in_pred = (growth) * prey * pred - death * pred
     return change_in_pred
-def pred_prey_timesteps(birth, predation, growth, death, prey, pred, years, num_timesteps_per_year):
+
+
+def pred_prey_timesteps(
+    birth,
+     predation,
+     growth,
+     death,
+     prey,
+     pred,
+     years,
+     num_timesteps_per_year):
     """Returns a list of time elapsed, prey pop. pred pop. Takes in smaller increments than a year"""
-    preylist=[prey]
-    predlist=[pred]
-    store=[(prey, pred)]
-    for _hello_its_me in range(years*num_timesteps_per_year):
-        preylist.append(prey+change_prey(birth/num_timesteps_per_year, predation/num_timesteps_per_year, prey, pred))
-        predlist.append(pred+change_pred(growth/num_timesteps_per_year, death/num_timesteps_per_year, prey, pred))
+    preylist = [prey]
+    predlist = [pred]
+    store = [(prey, pred)]
+    for _hello_its_me in range(years * num_timesteps_per_year):
+        preylist.append(
+            prey + change_prey(birth / num_timesteps_per_year, predation / num_timesteps_per_year, prey, pred))
+        predlist.append(
+            pred + change_pred(growth / num_timesteps_per_year, death / num_timesteps_per_year, prey, pred))
         prey = preylist[-1]
         pred = predlist[-1]
-        store.append((prey,pred))
-    time_stop=0.0
-    index=0
+        store.append((prey, pred))
+    time_stop = 0.0
+    index = 0
     return_list = []
     while(time_stop <= years):
         temp_tuple = (time_stop, store[index][0], store[index][1])
         return_list.append(temp_tuple)
-        time_stop+=1.0/num_timesteps_per_year
-        index+=1
+        time_stop += 1.0 / num_timesteps_per_year
+        index += 1
     return return_list
 #                                 b   p   g  d  pr   pr y   n
 populations = pred_prey_timesteps(0.5, 0, 0, 0, 100, 5, 40, 1)
@@ -59,48 +73,62 @@ populations = pred_prey_timesteps(0.5, 0, 0, 0, 100, 5, 40, 1)
 # "num_timesteps"+1 -- it has the populations at the beginning of the
 # simulation, plus after each time step.
 
+
 def pred_prey(birth, predation, growth, death, prey, pred, num_timesteps):
     """Returns data indicating changes in predator and prey population pver time"""
-    preylist=[prey]
-    predlist=[pred]
-    store=[(prey, pred)]
+    preylist = [prey]
+    predlist = [pred]
+    store = [(prey, pred)]
     for _hello_its_me in range(num_timesteps):
-        preylist.append(prey+change_prey(birth, predation, prey, pred))
-        predlist.append(pred+change_pred(growth, death, prey, pred))
+        preylist.append(prey + change_prey(birth, predation, prey, pred))
+        predlist.append(pred + change_pred(growth, death, prey, pred))
         prey = preylist[-1]
         pred = predlist[-1]
-        store.append((prey,pred))
+        store.append((prey, pred))
     return store
 
 
-def pred_prey_carrying(birth, predation, growth, death, carry_cap, prey, pred, years, num_timesteps_per_year):
+def pred_prey_carrying(
+    birth,
+     predation,
+     growth,
+     death,
+     carry_cap,
+     prey,
+     pred,
+     years,
+     num_timesteps_per_year):
     """Acts like pred_prey_timesteps, however this caps the prey population at a carrying cap"""
-    preylist=[prey]
-    predlist=[pred]
-    store=[(prey, pred)]
-    for _hello_its_me in range(years*num_timesteps_per_year):
-        temp_new_prey = prey+change_prey(birth/num_timesteps_per_year, predation/num_timesteps_per_year, prey, pred)
+    preylist = [prey]
+    predlist = [pred]
+    store = [(prey, pred)]
+    for _hello_its_me in range(years * num_timesteps_per_year):
+        temp_new_prey = prey + \
+            change_prey(birth / num_timesteps_per_year,
+                        predation / num_timesteps_per_year, prey, pred)
         preylist.append(min(carry_cap, temp_new_prey))
-        predlist.append(pred+change_pred(growth/num_timesteps_per_year, death/num_timesteps_per_year, prey, pred))
+        predlist.append(
+            pred + change_pred(growth / num_timesteps_per_year, death / num_timesteps_per_year, prey, pred))
         prey = preylist[-1]
         pred = predlist[-1]
-        store.append((prey,pred))
-    time_stop=0.0
-    index=0
+        store.append((prey, pred))
+    time_stop = 0.0
+    index = 0
     return_list = []
     while(time_stop <= years):
         temp_tuple = (time_stop, store[index][0], store[index][1])
         return_list.append(temp_tuple)
-        time_stop+=1.0/num_timesteps_per_year
-        index+=1
+        time_stop += 1.0 / num_timesteps_per_year
+        index += 1
     return return_list
 
-#populations = pred_prey_timesteps(0.0, 0.0, 0.0, 0.0025000000000000001, 0, 100, 10, 2)
-##################################################################
+# populations = pred_prey_timesteps(0.0, 0.0, 0.0, 0.0025000000000000001, 0, 100, 10, 2)
+#
 # Plotting results
 
 
 print(populations)
+
 
 def plot_pred_prey(populations, pred_name, prey_name):
     """plots prey pop. vs predator pop."""
@@ -110,17 +138,17 @@ def plot_pred_prey(populations, pred_name, prey_name):
     prey_pred = zip(prey, pred)
 
     simpleplot.plot_lines("Plot of predator and prey populations",
-                         600, 300,
-                         pred_name, prey_name,
-                         [prey_pred], True)
+                          600, 300,
+                          pred_name, prey_name,
+                          [prey_pred], True)
 
-#plot_pred_prey(populations, "Foxes", "Rabbits")
+# plot_pred_prey(populations, "Foxes", "Rabbits")
 
 
 def plot_time_populations(populations, pred_name, prey_name):
     """Plots populations of prey and pred vs years elapsed"""
-    prey_e=[]
-    pred_e=[]
+    prey_e = []
+    pred_e = []
     print(pred_name)
     print(prey_name)
     time, prey, pred = zip(*populations)
@@ -136,4 +164,4 @@ def plot_time_populations(populations, pred_name, prey_name):
 plot_time_populations(populations, "Pred", "Prey")
 
 
-#print(pred_prey_timesteps(0.0, 0.0, 0.0, 0.0025, 0, 100, 3 ,2))
+# print(pred_prey_timesteps(0.0, 0.0, 0.0, 0.0025, 0, 100, 3 ,2))

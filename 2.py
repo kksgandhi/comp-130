@@ -1,5 +1,5 @@
-a=[0,1]
-for i in range(40):
-    a.append(a[-1]+a[-2])
+import collections
+mapping = collections.Counter()
 
-print(a)
+mapping[7] = 42
+print(mapping[8])

@@ -1,4 +1,4 @@
-favorites = {"Hello": "There", "Allo": "Therey"}
-
-favorites["fruit" : "blackberry"]
-print(favorites)
+db = {}
+print db
+db["hello"] = "meeep"
+print db

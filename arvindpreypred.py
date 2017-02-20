@@ -13,7 +13,7 @@ Full Names:
 """
 
 
-#################################################################
+#
 # Predator-prey problem
 
 # 1:
@@ -21,11 +21,12 @@ Full Names:
 # and change_pred(growth, death, prey, pred), as described in the
 # Lotka-Volterra Model video.
 def change_prey(birth, predation, prey, pred):
-    change_prey = (birth)*prey - predation*prey*pred
+    change_prey = (birth) * prey - predation * prey * pred
     return change_prey
 
+
 def change_pred(growth, death, prey, pred):
-    change_pred = (growth)*prey*pred - death*pred
+    change_pred = (growth) * prey * pred - death * pred
     return change_pred
 
 
@@ -43,21 +44,19 @@ def change_pred(growth, death, prey, pred):
 # simulation, plus after each time step.
 
 def pred_prey(birth, predation, growth, death, prey, pred, num_timesteps):
-    preylist=[prey]
-    predlist=[pred]
-    store=[(prey, pred)]
+    preylist = [prey]
+    predlist = [pred]
+    store = [(prey, pred)]
     for i in range(num_timesteps):
-        preylist.append(prey+change_prey(birth, predation, prey, pred))
-        predlist.append(pred+change_pred(growth, death, prey, pred))
+        preylist.append(prey + change_prey(birth, predation, prey, pred))
+        predlist.append(pred + change_pred(growth, death, prey, pred))
         prey = preylist[-1]
         pred = predlist[-1]
-        store.append((prey,pred))
+        store.append((prey, pred))
     return store
 
 
-
-
-#################################################################
+#
 # Nested loops
 # In the following, you'll want two loops, one nested inside the
 # other.  Or, if you prefer, you can split it into two looping functions,
@@ -98,7 +97,7 @@ def make_deck(cards, suits):
 # same line, use   "print something, "    -- Note the comma at the end.
 
 def print_triangle(string):
-    for i in range(len(string)+1):
+    for i in range(len(string) + 1):
         print string[:i]
 print_triangle('hello')
 
@@ -117,17 +116,16 @@ print_triangle('hello')
 #            ['b', 'a', 'd', 'c']])
 # should return [4, 2, 0].
 
+
 def grade_all(solutions, answers):
-    score=[]
+    score = []
     for i in answers:
-        for j in range(len(answers[i])+1):
+        for j in range(len(answers[i]) + 1):
             if answers[i][j] == solutions[j]:
                 score.append(1)
 
 
-
-
-#################################################################
+#
 # Removing selected elements from a list
 #
 # We often want to be able to remove selected elements from a list.
@@ -146,31 +144,30 @@ def grade_all(solutions, answers):
 # Hint:  Try adding some print statements in the functions
 # to see what is happening.
 
-#def remove_elements1(input_list, elements_to_remove):
+# def remove_elements1(input_list, elements_to_remove):
 #    for idx in range(len(input_list)):
 #        if input_list[idx] in elements_to_remove:
 #            input_list.pop(idx)
 #
-#    return input_list  # so that the function can be tested.
+# return input_list  # so that the function can be tested.
 #
-#numbers1 = range(10)
-#numbers_to_remove1 = [3, 7, 2]
-#remove_elements1(numbers1, numbers_to_remove1)
-#print numbers1
+# numbers1 = range(10)
+# numbers_to_remove1 = [3, 7, 2]
+# remove_elements1(numbers1, numbers_to_remove1)
+# print numbers1
 
 
-#def remove_elements2(input_list, elements_to_remove):
+# def remove_elements2(input_list, elements_to_remove):
 #    for elt in input_list:
 #        if elt in elements_to_remove:
 #            input_list.remove(elt)
 #
-#    return input_list  # so that the function can be tested.
+# return input_list  # so that the function can be tested.
 #
-#numbers2 = range(10)
-#numbers_to_remove2 = [3, 7, 2]
-#remove_elements2(numbers2, numbers_to_remove2)
-#print numbers2
-
+# numbers2 = range(10)
+# numbers_to_remove2 = [3, 7, 2]
+# remove_elements2(numbers2, numbers_to_remove2)
+# print numbers2
 
 
 # 7:
@@ -187,5 +184,3 @@ def grade_all(solutions, answers):
 # no_dups([5, 8, 3, 5, 8, 2]) should return [5, 8, 3, 2].
 def no_dups(a_list):
     pass
-
-
