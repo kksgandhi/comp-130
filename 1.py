@@ -1,4 +1,6 @@
-db = {}
-print db
-db["hello"] = "meeep"
-print db
+import re
+
+str ="This is a strangely spaced\tsample.\n\nIt is a string."
+print(re.split(r"\s*",str))
+print(re.split(r"\s+",str))
+print(str.split())
