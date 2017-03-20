@@ -161,7 +161,7 @@ def is_rectangular_grid(grid):
 
     Assumes that the grid is a list of lists.
     """
-    if(len(grid)==0):
+    if(len(grid) == 0):
         return True
     init_grid_len = len(grid[0])
     for row in grid:

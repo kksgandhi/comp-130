@@ -44,10 +44,7 @@ def getWords(filename, include_punc, case_sensitive):
 
 
 def median_word(filename):
-    list_of_words = []
-    for word in getWords(filename, False, False):
-        print(word)
-        list_of_words.append(word.lower())
+    list_of_words = getWords(filename, False, False)
     dict = {}
     for word in list_of_words:
         if word in dict:
@@ -58,7 +55,7 @@ def median_word(filename):
     for key in dict:
         value_list.append((key, dict[key]))
     value_list.sort(key=lambda x: x[1])
-    return value_list[len(value_list) / 2][0]
+    return value_list[(len(value_list) / 2) - 1][0]
 
 
 def wordseq_successor_counts(
@@ -80,7 +77,7 @@ def wordseq_successor_counts(
     return return_dict
 
 
-print(wordseq_successor_counts(['comp130_AmericanPie.txt'], 1, False, False))
+# print(wordseq_successor_counts(['comp130_AmericanPie.txt'], 1, False, False))
 
 
 def wordseq_successor_frequencies(
@@ -88,4 +85,17 @@ def wordseq_successor_frequencies(
      seq_size,
      include_punc,
      is_case_sensitive):
-
+    counts_dict = wordseq_successor_counts(
+        filename_list,
+        seq_size,
+     include_punc,
+     is_case_sensitive)
+    return_dict = defaultdict(dict)
+    for key in counts_dict:
+        total_count = 0.0
+        for inner_key in counts_dict[key]:
+            total_count += float(counts_dict[key][inner_key])
+        for inner_key in counts_dict[key]:
+            return_dict[key][inner_key] = float(
+                counts_dict[key][inner_key]) / float(total_count)
+    return return_dict

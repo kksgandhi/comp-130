@@ -1,11 +1,12 @@
 empty_db():
-Merely returns empty dictionary: {} (I realize after coding that I should have used default dict, but my code checks for errors and works fine, it was just harder)
+Merely returns empty dictionary:
+    {}(I realize after coding that I should have used default dict, but my code checks for errors and works fine, it was just harder)
 add_item():
 returns false if both the artist and artwork are in the database.
 otherwise, it initializes artist into the database, and then initializes the artwork into a tuple of the relevant information
 change_owner():
 if the artst or artwork doesn't exist, returns false. Otherwise creates a temporary tuple of the info already in the database, a new tuple with the new information, and sets the database's information to the new updated tuple
-select-artist():
+select - artist():
 creates a temp dictionary, if the artist exists add artist information to the temp dictionary and return it, otherwise return false
 select artwork():
 create a temporary database, loop through all the artists, if the artwork exists, initialize the temporary database to have the artists and add the artwork information to that. Do not initialize if the artist already exists in the temporary database. return the temporary database.
