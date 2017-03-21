@@ -1,0 +1,55 @@
+Recipe for text analysis project:
+
+findall sl:
+regex that starts with a word boundary, followed by sl, followed by anything, followed by a word boundary
+
+findall triple vowel:
+regex: word boundary, anything, a triple vowel, anything, word boundary
+
+findall 80s:
+I can't really think of anything creative, so just any word that contains eighties, 198?, 1980s, or 80s
+
+get word list:
+Since every following method requires a word list from a file, this will be a helper function that takes a file and returns words
+Loops through each line in file
+loops throuh each word in line, word as defined by regex given by my comp overlords.
+Adds each word to a list. Instead adds lowercase version of word if not case sensitive
+loops through list, removes words that are mere punctuation if not include punctuation
+return list
+
+count distinct words:
+gets word list using helper
+adds words to set
+returns set length
+
+median word:
+gets word list
+loops through word list
+create dictionary mapping words to a count
+Addendum: I did not know what a counter was upon writing this
+create list of tuples, word and count
+sort list based on count
+return middle value
+
+wordseq successor counts:
+loop through file list
+get word list for each file
+loop through word lists
+create a default dict of counters
+for each word in word list, create tuple of that word and the following words of seq size
+Create/Update dictionary value of each tuple.
+Each tuple maps to counter, which maps string to number
+update counter value by adding one to the value mapped to the string after the tuple
+because I am using a default dictionary of counters (a default dict itself), this can be done in one line
+the dictionary maps a tuple to a counter which maps the word after the tuple to a number which should be increased by one.
+return this dictionary
+
+wordseq successor frequencies
+get wordseq successor counts (will be called counts dict)
+create new default dict filled with dicts
+loop through counts dict, for each tuple do this:
+create a total count of all the inner counter objects
+for each counter object, divide by the total count value
+add the counter's string, map it to the divided value
+now there is a tuple, mapping to a bunch of strings, each matching to a new divided number
+return this dictionary
