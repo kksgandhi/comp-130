@@ -1,8 +1,4 @@
-list = [1, 2, 3, 4, 5, 6]
-size = 3
-for index in range(0, len(list) - size):
-    for second_index in range(0, size):
-        print list[index + second_index]
-    print "----"
-    print list[index + size]
-    print "----"
+def drop(lst, interval):
+    return [item2 for item1, item2 in enumerate(lst)
+            if (item1 + 1) % interval]
+print drop(range(15), 3)
