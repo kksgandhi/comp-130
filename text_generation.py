@@ -1,3 +1,9 @@
+"""
+This project contains functions used to turn a dictionary of markhov
+instructions into a markhov chain string
+It contains functions that develop the string in different ways for testing
+purposes
+"""
 import re
 import random
 # from sets import Set
@@ -25,6 +31,10 @@ def pick_key_first(keys):
 
 
 def stop_generating_sentence(strings):
+    """
+    returns True if the last object in a list of strings is punctuation
+    Used to tell if another function needs to stop generating textj
+    """
     if len(strings) < 1:
         return False
     if re.match(r"(?:\.|!+|\?+)", strings[-1]):
@@ -33,6 +43,9 @@ def stop_generating_sentence(strings):
 
 
 def stop_generating_20(strings):
+    """
+    Returns true if the length of the list is greater than 20
+    """
     return len(strings) >= 20
 
 
@@ -44,12 +57,19 @@ def pick_successor_first(successor_dict):
         return None
 
 
-def stop_generating_random(strings):
+def stop_generating_random():
+    """
+    Returns true randomly, one tenth of the time
+    """
     probability = 0.1
     return random.random() < probability
 
 
 def pick_successor_random(successor_dict):
+    """
+    Randomly picks an key from a dictionary
+    This is weighted by the value mapped by the key
+    """
     rand_num = random.random()
     for key in successor_dict:
         if(successor_dict[key] > rand_num):
@@ -63,6 +83,11 @@ def form_utterance_simple(strings):
 
 
 def form_utterance_nice(strings):
+    """
+    Takes a list of words and joins them together into
+    a formatted string
+    the first word is capitalized, and the string ends with a period
+    """
     if(len(strings) < 1):
         return ""
     string_list = []
@@ -75,14 +100,18 @@ def form_utterance_nice(strings):
         string_list[0] = string_list[0][0].upper() + string_list[0][1:]
     except AttributeError:
         pass
-    for i in range(0, len(string_list) - 1):
-        if(re.match(r"(?:\.+|!+|\?+)", string_list[i])):
-            string_list[i + 1] = string_list[
-                i + 1][0].upper() + string_list[i + 1][1:]
+    for index in range(0, len(string_list) - 1):
+        if(re.match(r"(?:\.+|!+|\?+)", string_list[index])):
+            string_list[index + 1] = string_list[
+                index + 1][0].upper() + string_list[index + 1][1:]
     return " ".join(string_list)
 
 
 def neural_net(input_node_set, num_hidden_nodes, output_node_set):
+    """
+    Creates a nueral network graph where the set of input nodes is mapped
+    to a set of hidden nodes which are mapped to the output nodes
+    """
     return_dict = {}
     intersection_set = input_node_set.intersection(output_node_set)
     print(intersection_set)
@@ -91,14 +120,14 @@ def neural_net(input_node_set, num_hidden_nodes, output_node_set):
     temp_list = []
     for word in input_node_set:
         temp_list = []
-        for i in range(num_hidden_nodes):
-            temp_list.append(i)
+        for index in range(num_hidden_nodes):
+            temp_list.append(index)
         return_dict[word] = set(temp_list)
-    for i in range(num_hidden_nodes):
+    for index in range(num_hidden_nodes):
         temp_list = []
         for word in output_node_set:
             temp_list.append(word)
-        return_dict[i] = set(temp_list)
+        return_dict[index] = set(temp_list)
     for word in output_node_set:
         return_dict[word] = set([])
     return return_dict
@@ -112,6 +141,12 @@ def generate_text(
      stop_generating,
      pick_successor,
      form_utterance):
+    """
+    Takes a dictionary with instructions for a markhov chain
+    generates a markhov string based on the dictionary
+    The methods for generating the string are based on the functions passed as
+    input
+    """
     string_list = []
     no_mutate_dict = {}
     for key in chain:
