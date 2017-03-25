@@ -113,8 +113,11 @@ def generate_text(
      pick_successor,
      form_utterance):
     string_list = []
-    size_of_seq = len(chain.keys()[0])
-    for word in pick_starting_key(chain.keys()):
+    no_mutate_dict = {}
+    for key in chain:
+        no_mutate_dict[key] = chain[key]
+    size_of_seq = len(no_mutate_dict.keys()[0])
+    for word in pick_starting_key(no_mutate_dict.keys()):
         string_list.append(word)
     while(not stop_generating(string_list)):
         temp_list = []
@@ -122,7 +125,7 @@ def generate_text(
             temp_list.append(word)
         temp_tuple = tuple(temp_list)
         try:
-            string_list.append(pick_successor(chain[temp_tuple]))
+            string_list.append(pick_successor(no_mutate_dict[temp_tuple]))
         except KeyError:
             break
     return form_utterance(string_list)
