@@ -86,4 +86,26 @@ class Graph1:
 class Graph2:
 
     def __init__(self):
-        self._adjmatrix = [[]]
+        self._adjmatrix = []
+        self._name = []
+
+    def __str__(self):
+        built_string = "Graph("
+        built_string += str(self.get_nodes())
+        built_string += ", "
+        built_string += str(self.get_edges())
+        built_string += ")"
+        return built_string
+
+    def add_node(self, name):
+        if name not in self._name:
+            self._name.append(name)
+        while(len(self._name) > len(self._adjmatrix)):
+            self._adjmatrix.append([])
+        for single_list in self._adjmatrix:
+            while(len(self._name) > len(single_list)):
+                single_list.append(False)
+
+    def add_edge(self, name_from, name_to):
+        self.add_node(name_from)
+        self.add_node(name_to)
