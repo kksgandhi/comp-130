@@ -139,7 +139,13 @@ def is_partition(graph,nodeset1,nodeset2):
     pass
 
 def connect_all(graph,nodeset):
-    pass
+    for element in nodeset:
+        graph.add_node(element)
+    for element1 in nodeset:
+        for element2 in nodeset:
+            if not element1 ==element2:
+                graph.add_edge(element1,element2)
+    return graph
 
 def shortest_path(graph,source,target):
     pass
