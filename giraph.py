@@ -120,14 +120,21 @@ class Graph2:
         return return_set
     def get_edges(self):
         return_set=set()
-        for outer_index in self._adjmatrix:
-            for inner_index in self._adjmatrix:
-                if(self._adjmatrix[outer_index][inner_index]):
+        for outer_index,outer_list in enumerate( self._adjmatrix ):
+            for inner_index,inner_item in enumerate( outer_list ):
+                if(inner_item):
                     return_set.add((self._name[outer_index],self._name[inner_index]))
+        return return_set
     def is_neighbor(self,name_from,name_to):
         from_index=self._name.index(name_from)
         to_index=self._name.index(name_to)
         return self._adjmatrix[from_index][to_index]
+graph = Graph2()
+graph.add_node("red")               # Adds one node.
+graph.add_edge("blue","red")        # Adds one node (the other already exists) and one edge.
+graph.add_edge("orange","green")    # Adds two nodes and one edge.
+graph.add_node("orange")            # Should have no effect.  Edge already exists.
+print graph.get_edges()
 def is_partition(graph,nodeset1,nodeset2):
     pass
 
