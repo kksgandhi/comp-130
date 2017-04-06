@@ -109,3 +109,30 @@ class Graph2:
     def add_edge(self, name_from, name_to):
         self.add_node(name_from)
         self.add_node(name_to)
+        from_index=self._name.index(name_from)
+        to_index=self._name.index(name_to)
+        self._adjmatrix[from_index][to_index]=True
+
+    def get_nodes(self):
+        return_set=set()
+        for value in self._name:
+            return_set.add(value)
+        return return_set
+    def get_edges(self):
+        return_set=set()
+        for outer_index in self._adjmatrix:
+            for inner_index in self._adjmatrix:
+                if(self._adjmatrix[outer_index][inner_index]):
+                    return_set.add((self._name[outer_index],self._name[inner_index]))
+    def is_neighbor(self,name_from,name_to):
+        from_index=self._name.index(name_from)
+        to_index=self._name.index(name_to)
+        return self._adjmatrix[from_index][to_index]
+def is_partition(graph,nodeset1,nodeset2):
+    pass
+
+def connect_all(graph,nodeset):
+    pass
+
+def shortest_path(graph,source,target):
+    pass
