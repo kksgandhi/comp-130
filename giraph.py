@@ -1,3 +1,7 @@
+"""
+This file contains classes that define a graph,
+as well as methods that analyse those graphs
+"""
 from collections import defaultdict
 # from collections import set
 
@@ -85,11 +89,25 @@ class Graph1:
 
 class Graph2:
 
+    """
+    defines a graph as a list of lists,
+    where list[i][j] is True if there is an edge from i to j
+    contains a name variable that converts graph indices to names
+    and vice versa
+    """
+
     def __init__(self):
+        """
+        Initializes graph object
+        """
         self._adjmatrix = []
         self._name = []
 
     def __str__(self):
+        """
+        Returns a string that represents the graph
+        Returns Graph(nodeset, edgeset)
+        """
         built_string = "Graph("
         built_string += str(self.get_nodes())
         built_string += ", "
@@ -98,6 +116,9 @@ class Graph2:
         return built_string
 
     def add_node(self, name):
+        """
+        Adds node to graph and updates nodenames
+        """
         if name not in self._name:
             self._name.append(name)
         while(len(self._name) > len(self._adjmatrix)):
@@ -107,6 +128,9 @@ class Graph2:
                 single_list.append(False)
 
     def add_edge(self, name_from, name_to):
+        """
+        Adds edge between name_from and name_to
+        """
         self.add_node(name_from)
         self.add_node(name_to)
         from_index = self._name.index(name_from)
@@ -114,12 +138,20 @@ class Graph2:
         self._adjmatrix[from_index][to_index] = True
 
     def get_nodes(self):
+        """
+        Returns set of nodes in the graph
+        """
         return_set = set()
         for value in self._name:
             return_set.add(value)
         return return_set
 
     def get_edges(self):
+        """
+        returns a set of tuples
+        Each tuple is an edge
+        (source,target)
+        """
         return_set = set()
         for outer_index, outer_list in enumerate(self._adjmatrix):
             for inner_index, inner_item in enumerate(outer_list):
@@ -130,11 +162,17 @@ class Graph2:
         return return_set
 
     def is_neighbor(self, name_from, name_to):
+        """
+        Returns whether or not one node has an edge to the other
+        """
         from_index = self._name.index(name_from)
         to_index = self._name.index(name_to)
         return self._adjmatrix[from_index][to_index]
 
     def get_node_neighbors(self, node):
+        """
+        Returns the set of neighbors that one node has
+        """
         return_set = set()
         for index, element in enumerate(self._adjmatrix[self._name.index(node)]):
             if element:
@@ -143,6 +181,11 @@ class Graph2:
 
 
 def is_partition(graph, nodeset1, nodeset2):
+    """
+    Determines if two nodesets partition a graph
+    (They have no possible path from one to another)
+    (Or no possible path from one to a common neighbor)
+    """
     if len(nodeset1) < 1:
         return False
     if len(nodeset2) < 1:
@@ -171,6 +214,7 @@ def is_partition(graph, nodeset1, nodeset2):
 
 
 def connect_all(graph, nodeset):
+    """Connects all nodes in the set to all others in the set"""
     for element in nodeset:
         graph.add_node(element)
     for element1 in nodeset:
@@ -181,9 +225,21 @@ def connect_all(graph, nodeset):
 
 
 def shortest_path(graph, source, target):
+    """
+    Returns a list representing the shortest path
+    by way of the recursive function below
+    returns None if there is no shortest path
+    [Source, Step 1 in path, Step 2 in path..., target]
+    """
     return shortest_path_recursive(graph, source, target, set())
 
+
 def shortest_path_recursive(graph, source, target, visited):
+    """
+    Returns the shortest path from a source to target
+    returns None if there is no shortest path
+    [Source, Step 1 in path, Step 2 in path..., target]
+    """
     if source == target:
         return [source]
     neighbor_set = graph.get_node_neighbors(source).difference(visited)
