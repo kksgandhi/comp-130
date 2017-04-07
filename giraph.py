@@ -183,23 +183,23 @@ def connect_all(graph, nodeset):
 def shortest_path(graph, source, target):
     if source == target:
         return [source]
-    return shortest_path_recursive(graph,source,target,set())
+    return shortest_path_recursive(graph, source, target, set())
 
-def shortest_path_recursive(graph,source,target,visited):
+
+def shortest_path_recursive(graph, source, target, visited):
+    if source == target:
+        return [source]
     neighbor_set = graph.get_node_neighbors(source).difference(visited)
-    if len(neighbor_set)<1:
+    if len(neighbor_set) < 1:
         return None
-    if target in neighbor_set:
-        return [source,target]
-    new_visited_set = neighbor_set.union(visited)
+    neighbor_set = neighbor_set.union(visited)
     return_list = [source]
     for element in neighbor_set:
-        recur_list = shortest_path_recursive(graph,element,target,new_visited_set)
+        recur_list = shortest_path_recursive(
+            graph, element, target, neighbor_set)
         if not recur_list is None:
             for return_item in recur_list:
                 return_list.append(return_item)
-    if len(return_list)<2:
+    if len(return_list) < 2:
         return None
     return return_list
-
-
