@@ -109,43 +109,62 @@ class Graph2:
     def add_edge(self, name_from, name_to):
         self.add_node(name_from)
         self.add_node(name_to)
-        from_index=self._name.index(name_from)
-        to_index=self._name.index(name_to)
-        self._adjmatrix[from_index][to_index]=True
+        from_index = self._name.index(name_from)
+        to_index = self._name.index(name_to)
+        self._adjmatrix[from_index][to_index] = True
 
     def get_nodes(self):
-        return_set=set()
+        return_set = set()
         for value in self._name:
             return_set.add(value)
         return return_set
-    def get_edges(self):
-        return_set=set()
-        for outer_index,outer_list in enumerate( self._adjmatrix ):
-            for inner_index,inner_item in enumerate( outer_list ):
-                if(inner_item):
-                    return_set.add((self._name[outer_index],self._name[inner_index]))
-        return return_set
-    def is_neighbor(self,name_from,name_to):
-        from_index=self._name.index(name_from)
-        to_index=self._name.index(name_to)
-        return self._adjmatrix[from_index][to_index]
-graph = Graph2()
-graph.add_node("red")               # Adds one node.
-graph.add_edge("blue","red")        # Adds one node (the other already exists) and one edge.
-graph.add_edge("orange","green")    # Adds two nodes and one edge.
-graph.add_node("orange")            # Should have no effect.  Edge already exists.
-print graph.get_edges()
-def is_partition(graph,nodeset1,nodeset2):
-    pass
 
-def connect_all(graph,nodeset):
+    def get_edges(self):
+        return_set = set()
+        for outer_index, outer_list in enumerate(self._adjmatrix):
+            for inner_index, inner_item in enumerate(outer_list):
+                if(inner_item):
+                    return_set.add(
+                        (self._name[outer_index],
+                         self._name[inner_index]))
+        return return_set
+
+    def is_neighbor(self, name_from, name_to):
+        from_index = self._name.index(name_from)
+        to_index = self._name.index(name_to)
+        return self._adjmatrix[from_index][to_index]
+
+    def get_node_neighbors(self,node):
+        return_set = set()
+        for index, element in enumerate(  self._adjmatrix[self._name.index(node)] ):
+            if element:
+                return_set.add(self._name[index])
+        return return_set
+
+def is_partition(graph, nodeset1, nodeset2):
+    if len(nodeset1)<1:
+        return False
+    if len(nodeset2)<1:
+        return False
+    if(len(nodeset1.intersection(nodeset2))>0):
+        return False
+    for element1 in nodeset1:
+        for element2 in nodeset2:
+            if graph.is_neighbor(element1,element2):
+                return False
+            if graph.is_neighbor(element2,element1):
+                return False
+    return True
+
+def connect_all(graph, nodeset):
     for element in nodeset:
         graph.add_node(element)
     for element1 in nodeset:
         for element2 in nodeset:
-            if not element1 ==element2:
-                graph.add_edge(element1,element2)
+            if not element1 == element2:
+                graph.add_edge(element1, element2)
     return graph
 
-def shortest_path(graph,source,target):
+
+def shortest_path(graph, source, target):
     pass
