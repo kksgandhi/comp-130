@@ -134,22 +134,23 @@ class Graph2:
         to_index = self._name.index(name_to)
         return self._adjmatrix[from_index][to_index]
 
-    def get_node_neighbors(self,node):
+    def get_node_neighbors(self, node):
         return_set = set()
-        for index, element in enumerate(  self._adjmatrix[self._name.index(node)] ):
+        for index, element in enumerate(self._adjmatrix[self._name.index(node)]):
             if element:
                 return_set.add(self._name[index])
         return return_set
 
+
 def is_partition(graph, nodeset1, nodeset2):
-    if len(nodeset1)<1:
+    if len(nodeset1) < 1:
         return False
-    if len(nodeset2)<1:
+    if len(nodeset2) < 1:
         return False
-    if(len(nodeset1.intersection(nodeset2))>0):
+    if(len(nodeset1.intersection(nodeset2)) > 0):
         return False
-    return_list=[]
-    return_list2=[]
+    return_list = []
+    return_list2 = []
     for element in nodeset1:
         return_list.append(element)
     for element in nodeset2:
@@ -159,24 +160,23 @@ def is_partition(graph, nodeset1, nodeset2):
         for element in graph.get_node_neighbors(return_list[index]):
             if element not in return_list:
                 return_list.append(element)
-        index+=1
-    index=0
+        index += 1
+    index = 0
     while index < len(return_list2):
         for element in graph.get_node_neighbors(return_list2[index]):
             if element not in return_list2:
                 return_list2.append(element)
-        index+=1
-    return len(set(return_list).intersection(set(return_list2)))<1
+        index += 1
+    return len(set(return_list).intersection(set(return_list2))) < 1
 
 
-
-def connect_all(graph,nodeset):
+def connect_all(graph, nodeset):
     for element in nodeset:
         graph.add_node(element)
     for element1 in nodeset:
         for element2 in nodeset:
-            if not element1 ==element2:
-                graph.add_edge(element1,element2)
+            if not element1 == element2:
+                graph.add_edge(element1, element2)
     return graph
 
 
