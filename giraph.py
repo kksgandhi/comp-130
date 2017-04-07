@@ -181,8 +181,6 @@ def connect_all(graph, nodeset):
 
 
 def shortest_path(graph, source, target):
-    if source == target:
-        return [source]
     return shortest_path_recursive(graph, source, target, set())
 
 
