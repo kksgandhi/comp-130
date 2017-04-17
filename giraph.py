@@ -5,7 +5,6 @@ as well as methods that analyse those graphs
 from collections import defaultdict
 # from collections import set
 
-
 class Graph1:
 
     """
@@ -256,3 +255,10 @@ def shortest_path_recursive(graph, source, target, visited):
     if len(return_list) < 2:
         return None
     return return_list
+graph = Graph2()
+graph.add_edge("r","y")
+graph.add_edge("y","z")
+#graph.add_edge("b","z")
+#graph.add_edge("g","b")
+graph.add_edge("g","y")
+print shortest_path(graph,"r","z")
