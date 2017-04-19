@@ -2,11 +2,11 @@
 """
 Artificial Neural Net Simulation
 """
-import math
+# import math
 import random
-import time
-from collections import defaultdict
-from collections import Counter
+# import time
+# from collections import defaultdict
+# from collections import Counter
 
 import comp130_nntests as nntests
 
@@ -290,25 +290,19 @@ class Layer:
         """
 
         return self._nodes
-        pass
 
     def get_values(self):
         """
         Returns a list of the values of all the nodes in the layer.
         """
-        return_list = []
-        for node in self.get_nodes():
-            return_list.append(node.get_value)
-        return return_list
-        # TO BE IMPLEMENTED IN ASSIGNMENT
-        pass
+        return [node.get_value() for node in self.get_nodes()]
 
     def set_values(self, values):
         """
         Sets the value of each of the layer's nodes to the respective given values.
         values = List of values.  Its length must equal the number of nodes in the layer.
         """
-        for value, node in zip(values, self._get_nodes()):
+        for value, node in zip(values, self.get_nodes()):
                 node.set_value(value)
         # TO BE IMPLEMENTED IN ASSIGNMENT
         # Note: Same idea as set_errors().
@@ -319,7 +313,6 @@ class Layer:
         """
         return [node.get_error() for node in self.get_nodes()]
         # TO BE IMPLEMENTED IN ASSIGNMENT
-        pass
 
     def set_errors(self, expected_values):
         """
@@ -327,11 +320,10 @@ class Layer:
         expected_values = List of the expected values.  Its length must equal the
         number of nodes in the layer.
         """
-        for value,node in zip(expected_values,self.get_nodes()):
+        for value, node in zip(expected_values, self.get_nodes()):
             node.set_error(value)
         # TO BE IMPLEMENTED IN ASSIGNMENT
         # Note: Same idea as set_values().
-        pass
 
     def draw(self, canvas, x, size):
         """
@@ -421,9 +413,11 @@ class Layer:
 
         weight_range = pair of mean and width of the random weights given to the edges.
         """
-
+        weight = random_range_fn(weight_range)
+        for node in self.get_nodes():
+            for nextNode in next_layer.get_nodes():
+                Edge(weight, node, nextNode, factor)
         # TO BE IMPLEMENTED IN ASSIGNMENT
-        pass
 
 
 class NeuralNet:
@@ -465,7 +459,22 @@ class NeuralNet:
         self._output_layer = Layer(output_vals, test["fns"])
         self._hidden_layers = [Layer(hidden_vals, test["fns"])
                                for hidden_vals in hidden_vals_list]
+        _factor = test["factor"]
+        _rrf = test["random_range_fn"]
+        _weight_range = test["weight_range"]
 
+        prev_layer = self._input_layer
+        for next_layer in self._hidden_layers:
+            prev_layer.connect(next_layer, _factor, _rrf, _weight_range)
+            prev_layer = next_layer
+        prev_layer.connect(self._output_layer, _factor, _rrf, _weight_range)
+        # self._input_layer.connect(self._hidden_layers[0],_factor,_rrf,_weight_range)
+#
+        # for _index in range(1,len(self._hidden_layers)-1):
+            # self._hidden_layers[_index].connect(self._hidden_layers[_index+1],_factor,_rrf,_weight_range)
+#
+        # self._hidden_layers[-1].connect(self._output_layer,_factor,_rrf,_weight_range)
+#
         # Connect the layers
         # TO BE IMPLEMENTED IN ASSIGNMENT
         # Hint:  Use Layer.connect() to connect pairs of layers,
@@ -473,7 +482,6 @@ class NeuralNet:
         # each hidden layer to the next, and the last hidden layer
         # to the output layer.  One option is to structure this code
         # similar to the loop in NeuralNet.draw().
-        pass
 
     def draw(self, canvas):
         """
@@ -715,17 +723,17 @@ test = nntests.SEVEN_BIT_LED_TEST
 nn = NeuralNet(test)
 
 # Train and test neural net.  (No testing with STEPPER.)
-print "Training on",
-print len(test["training_data"]), "inputs, ",
-print "repeated", test["training_runs"], "times each ..."
-if CODESKULPTOR and STEPPER:
-    NNStepper(nn).train(test["training_data"], test["training_runs"])
-else:
-    start_time = time.time()
-    nn.train(test["training_data"], test["training_runs"])
-    nntests.test_NN(nn, test, SHOW_TESTS, VERBOSITY)
-    print
-    print "Elapsed time            :", nntests.time_formatter(time.time() - start_time)
-
-if CODESKULPTOR and not STEPPER:
-    draw_NN(nn)
+# print "Training on",
+# print len(test["training_data"]), "inputs, ",
+# print "repeated", test["training_runs"], "times each ..."
+# if CODESKULPTOR and STEPPER:
+    # NNStepper(nn).train(test["training_data"], test["training_runs"])
+# else:
+    # start_time = time.time()
+    # nn.train(test["training_data"], test["training_runs"])
+    # nntests.test_NN(nn, test, SHOW_TESTS, VERBOSITY)
+    # print
+    # print "Elapsed time            :", nntests.time_formatter(time.time() - start_time)
+#
+# if CODESKULPTOR and not STEPPER:
+    # draw_NN(nn)
