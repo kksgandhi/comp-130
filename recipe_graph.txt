@@ -1,0 +1,72 @@
+__init__():
+Create an edge matrix and a names matrix, both are empty lists
+
+__str__():
+Return a string representation of the graph.
+Start with a string "Graph(
+then append the string of nodes using get_nodes
+then append the string of edges using ged_edges
+
+add_node():
+if node is not in the names array
+add node to name array
+append false to the edge matrix until the edge matrix is size NxN where N is the length of the names matrix
+
+add_edge():
+Use the names matrix to find the indices of both nodes
+Make the adjacency matrix true at those indices
+
+get_nodes():
+return the name array in set form
+
+get_edges():
+Create an empty set
+loop through the adjacency matrix
+if a value is true, append the node names to the set created earlier (append as tuple of node_from, node_to)
+Use the name matrix to figure out what the node names are when adding to the set
+return that set
+
+is_neighbor():
+return the value of the adjacency matrix at the index of the nodes
+use the name matrix to find the index
+
+get_node_neighbors():
+create a set
+loop through the edge matrix for that node
+add a node to that set if there is an edge to that node
+use the name matrix to find the indices
+return that set  
+
+is_partition():
+return False for trivial cases (if either set is empty or they have the same elements)
+create two lists to prevent mutation
+add everything in set 1 to list 1
+for every node in list 1, find the neighbors
+add unique neighbors (neighbors not in list 1) to list 1
+continue looping through list 1. This is psuedo recursion, since if you add a new neighbor to the list, it will later be searched for neighbors
+This will add all nodes connected to the initial set to list 1
+do the same for list 2
+return whether or not list 1 and list 2 share any nodes
+If they have a node in common, that means that there is a node reachable from both initial node sets.
+
+shortest_path(graph, source, target):
+return shortest_path_recursive(graph, source, target, set())
+
+shortest shortest_path_recursive(graph, source, target, visited)
+if the source is the target, return a list with only the source
+get a set of the neighbors of the source
+if there are no neighbors, return None
+create a new visited set using the union of the neighbor set and the inputted visited set
+create a base return list using merely the source
+for the first node in the visited set, do shortest_path_recursive(graph, that node, target, visited)
+if that node is the target, it should return itself
+if that node has no path to the target, it will return none
+if that node has a path, but is not the source itself, it will return a path to the target from that node
+Take the path returned by a node. Append the source to the beginning of that path. You now have a list which is the path to the target from the source
+return that list.
+Holy crap I am bad at explaining recursion. 
+
+connect_all():
+for every node in the nodeset do:
+for every node in the nodeset
+add an edge from the first node to the second.
